@@ -14,6 +14,7 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 
+	"focus/backend/internal/auth"
 	"focus/backend/internal/config"
 	"focus/backend/internal/db"
 	"focus/backend/internal/httpx"
@@ -42,6 +43,9 @@ func main() {
 		}
 		httpx.JSON(w, http.StatusOK, map[string]string{"status": "ok"})
 	})
+
+	authSvc := auth.New(pool, cfg.CookieSecure)
+	r.Mount("/auth", authSvc.Routes())
 
 	srv := &http.Server{
 		Addr:              ":" + cfg.Port,
