@@ -1,0 +1,16 @@
+.omc/state/
+.claude/
+
+# Node
+node_modules/
+frontend/dist/
+
+# Go
+/backend/server
+*.exe
+
+# Env
+.env
+
+# Editor / OS
+.DS_Store
