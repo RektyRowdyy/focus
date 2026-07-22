@@ -25,14 +25,12 @@ func New(pool *pgxpool.Pool) *Service {
 	return &Service{pool: pool}
 }
 
-// Routes returns the settings sub-router. Mount it inside an auth-protected group.
-func (s *Service) Routes() http.Handler {
-	r := chi.NewRouter()
+// Register attaches the settings routes onto an (auth-protected) router.
+func (s *Service) Register(r chi.Router) {
 	r.Get("/settings", s.getSettings)
 	r.Put("/settings", s.putSettings)
 	r.Get("/soundscapes", s.getSoundscapes)
 	r.Put("/soundscapes", s.putSoundscapes)
-	return r
 }
 
 const settingsCols = `focus_min, short_min, long_min, long_interval,

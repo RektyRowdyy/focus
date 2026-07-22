@@ -83,7 +83,7 @@ func newAuthedClient(t *testing.T) (*httptest.Server, *http.Client) {
 	r.Mount("/auth", authSvc.Routes())
 	r.Group(func(pr chi.Router) {
 		pr.Use(authSvc.RequireAuth)
-		pr.Mount("/", New(pool).Routes())
+		New(pool).Register(pr)
 	})
 	srv := httptest.NewServer(r)
 	t.Cleanup(func() { srv.Close(); pool.Close() })
