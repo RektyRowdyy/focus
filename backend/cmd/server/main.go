@@ -18,6 +18,7 @@ import (
 	"focus/backend/internal/config"
 	"focus/backend/internal/db"
 	"focus/backend/internal/httpx"
+	"focus/backend/internal/settings"
 )
 
 func main() {
@@ -46,6 +47,13 @@ func main() {
 
 	authSvc := auth.New(pool, cfg.CookieSecure)
 	r.Mount("/auth", authSvc.Routes())
+
+	// Protected API — everything here requires a valid session cookie.
+	settingsSvc := settings.New(pool)
+	r.Group(func(pr chi.Router) {
+		pr.Use(authSvc.RequireAuth)
+		pr.Mount("/", settingsSvc.Routes())
+	})
 
 	srv := &http.Server{
 		Addr:              ":" + cfg.Port,
