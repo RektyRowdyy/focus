@@ -1,0 +1,68 @@
+/* Design tokens — the prototype's system encoded once. Dark is default; the
+   light block mirrors it. T-14 wires the theme toggle (sets data-theme). */
+
+:root {
+  /* Base + surfaces (depth from light, not shadows) */
+  --bg: #0e0f10;
+  --surface-1: rgba(255, 255, 255, 0.03);
+  --surface-2: rgba(255, 255, 255, 0.06);
+
+  /* Text tiers by hierarchy */
+  --text-faint: rgba(255, 255, 255, 0.4);
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --text-strong: rgba(255, 255, 255, 0.95);
+
+  /* Single accent (sage) — active state + progress ONLY, never decorative */
+  --accent: #6aab9d;
+  --accent-tint: rgba(106, 171, 157, 0.14);
+  --accent-tint-strong: rgba(106, 171, 157, 0.3);
+
+  /* Hairline divider */
+  --hairline: 0.5px solid rgba(255, 255, 255, 0.06);
+
+  /* Radii 12–26px */
+  --r-sm: 12px;
+  --r-md: 16px;
+  --r-lg: 20px;
+  --r-xl: 26px;
+
+  /* Type */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --timer-weight: 250; /* 200–300 range for the countdown digits */
+
+  /* Motion — slow, soft; never bounces */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur: 0.4s;
+
+  /* Min touch target */
+  --touch: 44px;
+
+  color-scheme: dark;
+}
+
+/* Light mirror — a full theme, not an inversion. Applies when the user's OS
+   prefers light and no explicit dark override is set. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f4f4f2;
+    --surface-1: rgba(0, 0, 0, 0.03);
+    --surface-2: rgba(0, 0, 0, 0.06);
+    --text-faint: rgba(20, 20, 22, 0.45);
+    --text-muted: rgba(20, 20, 22, 0.65);
+    --text-strong: rgba(20, 20, 22, 0.95);
+    --hairline: 0.5px solid rgba(0, 0, 0, 0.08);
+    color-scheme: light;
+  }
+}
+
+/* Explicit light override (toggle wins over OS preference) */
+:root[data-theme="light"] {
+  --bg: #f4f4f2;
+  --surface-1: rgba(0, 0, 0, 0.03);
+  --surface-2: rgba(0, 0, 0, 0.06);
+  --text-faint: rgba(20, 20, 22, 0.45);
+  --text-muted: rgba(20, 20, 22, 0.65);
+  --text-strong: rgba(20, 20, 22, 0.95);
+  --hairline: 0.5px solid rgba(0, 0, 0, 0.08);
+  color-scheme: light;
+}
