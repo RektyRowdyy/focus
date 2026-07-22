@@ -18,6 +18,7 @@ import (
 	"focus/backend/internal/config"
 	"focus/backend/internal/db"
 	"focus/backend/internal/httpx"
+	"focus/backend/internal/insights"
 	"focus/backend/internal/sessions"
 	"focus/backend/internal/settings"
 )
@@ -52,10 +53,12 @@ func main() {
 	// Protected API — everything here requires a valid session cookie.
 	settingsSvc := settings.New(pool)
 	sessionsSvc := sessions.New(pool)
+	insightsSvc := insights.New(pool)
 	r.Group(func(pr chi.Router) {
 		pr.Use(authSvc.RequireAuth)
 		settingsSvc.Register(pr)
 		sessionsSvc.Register(pr)
+		insightsSvc.Register(pr)
 	})
 
 	srv := &http.Server{
