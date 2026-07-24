@@ -1,4 +1,4 @@
-import { Placeholder } from "../focus/FocusScreen";
+import { Placeholder } from "../../app/Placeholder";
 
 // Placeholder — streak/heatmap/bars/donut land in T-12.
 export function InsightsScreen() {

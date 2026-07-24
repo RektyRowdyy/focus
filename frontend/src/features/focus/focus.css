@@ -1,0 +1,143 @@
+.focus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  padding: 12px 0 24px;
+}
+
+/* Session-type segmented toggle */
+.focus__types {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border: var(--hairline);
+  border-radius: var(--r-lg);
+}
+.focus__types button {
+  min-height: 34px;
+  padding: 0 16px;
+  background: transparent;
+  color: var(--text-faint);
+  border: none;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.focus__types button[aria-pressed="true"] {
+  background: var(--accent-tint);
+  color: var(--text-strong);
+}
+
+/* Ring + digits */
+.focus__ring {
+  position: relative;
+  width: 260px;
+  height: 260px;
+}
+.focus__ring svg {
+  transform: rotate(-90deg);
+}
+.focus__track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.06);
+  stroke-width: 3;
+}
+.focus__prog {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s linear;
+}
+.focus__center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.focus__label-type {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+.focus__digits {
+  font-weight: var(--timer-weight);
+  font-size: 64px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+  color: var(--text-strong);
+  line-height: 1;
+}
+
+/* Cycle dots */
+.focus__dots {
+  display: flex;
+  gap: 7px;
+}
+.focus__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  transition: background var(--dur) var(--ease);
+}
+.focus__dot--on {
+  background: var(--accent);
+}
+
+/* Controls — icon-only; secondary ones reveal on hover (pointer), always shown on touch */
+.focus__controls {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.focus__controls button {
+  display: grid;
+  place-items: center;
+  width: var(--touch);
+  height: var(--touch);
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color var(--dur) var(--ease), background var(--dur) var(--ease), opacity var(--dur) var(--ease);
+}
+.focus__controls button:hover {
+  color: var(--text-strong);
+  background: var(--surface-2);
+}
+.focus__primary {
+  color: var(--text-strong) !important;
+  background: var(--accent-tint) !important;
+}
+@media (hover: hover) {
+  .focus__secondary {
+    opacity: 0;
+  }
+  .focus:hover .focus__secondary,
+  .focus__secondary:focus-visible {
+    opacity: 1;
+  }
+}
+
+/* Free-text task label */
+.focus__task {
+  min-height: 34px;
+  min-width: 200px;
+  padding: 0 14px;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-bottom: var(--hairline);
+  color: var(--text-muted);
+  outline: none;
+}
+.focus__task::placeholder {
+  color: var(--text-faint);
+}
